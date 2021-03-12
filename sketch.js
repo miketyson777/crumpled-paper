@@ -4,9 +4,9 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 const Render = Matter.Render;
-var dustbinObj,groundObject	
+var dustbinObj, paperObject,groundObject	
 var world;
-var paper1
+
 
 function setup() {
 	createCanvas(1600, 700);
@@ -16,29 +16,55 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 	
+	paperObject=new paper(200,450,70);
 	groundObject=new ground(width/2,670,width,20);
 	dustbinObj=new dustbin(1200,650);
-	paper1=new paper(200,450,70);
+	//Create a Ground
+	
+
+	var render = Render.create({
+	  element: document.body,
+	  engine: engine,
+	  options: {
+	    width: 1600,
+	    height: 700,
+	    wireframes: false
+	  }
+	});
 
 	Engine.run(engine);
+	Render.run(render);
   
 }
 
 
 function draw() {
   rectMode(CENTER);
-  background("white");
+  background(230);
  
-
+  
+  paperObject.display();
   groundObject.display();
   dustbinObj.display();
-  paper1.display();
-  keyPressed();
+
+  
+  
+ 
+  
+  
+ 
 }
-function keyPressed(){
-if(KeyCode===UP_ARROW){
-	Matter.Body.applyForce(paper1.body,paper1.body.position,{x:130,y:-145})
-	//paper1.velocityX=4
-	//paper1.velocityY=2
+
+function keyPressed() {
+  	if (keyCode === UP_ARROW) {
+
+    	Matter.Body.applyForce(paperObject.body,paperObject.body.position,{x:130,y:-145});
+
+    
+  	}
 }
-}
+
+
+
+
+
